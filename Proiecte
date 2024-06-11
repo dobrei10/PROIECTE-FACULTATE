@@ -11,3 +11,81 @@ MEDICAL PREDICTIONS USING ARTIFICIAL NEURAL NETWORKS
 
     Heart problems are of several types such as typical angina, atypical angina and can occur due to the fat that accumulates on the blood vessels of people. 
     The application was implemented in the Matlab development environment using Artificial Neural Networks, Elementary Neurons and some tools offered by this system such as: Neural Net Fitting and App Designer.
+
+
+PORTABLE HEALTH MONITORING SYSTEM.
+
+In the framework of this project carried out in the 1st year of the master's degree in the 2nd semester, together with my teammates, I created a portable (wearable) system for health monitoring. It will follow the evolution of elderly beneficiaries (patients). The system
+it will monitor the evolution of some physiological parameters (ECG, humidity, temperature, pulse) through measurements from sensors, and if the values ​​read for a certain patient do not fall within the normal values, then it will receive different warnings on the Smartphone.
+The system will allow the connection of several doctors to the application for
+entering/viewing the patient record and monitoring and also of several patients.
+
+The created system was composed of 4 modules:
+- application for entering/viewing the patient record and monitoring
+- cloud component
+- mobile application
+- the intelligent module that will collect the data from the sensors (ECG, humidity, temperature, pulse).
+
+The application for entering/viewing the patient record and monitoring will be
+accessible on the web. Within it, a specialist doctor (cardiologist) can
+enter/view the patient's file and subsequently monitor its evolution and the patient's
+he will be able to view his data. 
+
+The doctor or the patient will be able to view different
+information taken from the sensors with the help of some graphs and to generate different ones
+reports. The doctor will also be able to introduce recommendations that the patient will
+must follow them (e.g. cycling, running, walking, certain physical exercises,
+etc.). 
+
+Based on the doctor's recommendations, the system will have to provide the display
+them on the Smartphone. The web application will be able to do the following:
+a. The doctor will be able to add a new patient; the data entered will be:
+- Demographic data (name, surname, age, CNP, address - divided by
+fields, phone number, email address, profession, workplace)
+- Medical data (medical history, allergies, cardiological consultations - in format
+text)
+b. The doctor will be able to modify, delete or view the patient's data, as well as
+history and patient progress graphs, including alarms/warnings
+and will enter the normal values ​​for the smart module, this will be
+customized for each patient.
+c. The patient will be able to view his own record, the recommendations given by the doctor and
+a history of activities and read values, including in the form of graphs,
+respectively a history of alarms/warnings created by the doctor and recorded in
+monitoring framework.
+d. The cardiologist will be able to do classic face-to-face consultations, and in the record
+the patient will be recorded the reason for presentation, symptoms, diagnosis
+(coded ICD-10), referrals (to tests, to the hospital, to treatments, to procedures),
+generated recipes. The doctor will be able to see the previous consultations, in the form
+tabular.
+
+The cloud component will allow to:
+a. record of users and associations; thus, the system will allow its use by several doctors, each doctor having a number of patients; each doctor will only be able to access the information of his own patients; the system will uniquely associate a patient with a Smartphone and with the set of sensors;
+b. storing and accessing the data from the patient's file, by the user doctors and by the patients, through the WEB interface.
+c. reception and storage of information received from the intelligent module through
+via Smartphone;
+d. receiving and storing other information sent by the Smartphone,
+e. storing and transmitting recommendations and alarms/warnings defined by
+doctor to the mobile application;
+f. receiving and storing activated alarms/warnings on patients' Smartphones.
+
+
+The mobile application will be made for Android smartphones and will have the possibility to:
+a. display the activities that the patient will have to perform and their calendar;
+b. display the doctor's recommendations;
+c. signal the warnings created by the mobile application according to the warning models established by the doctor, if data is received by the intelligent module that is not within the normal value; alerts are created based on measurements at 10 s intervals.
+d. will receive the information from the intelligent module through the Bluetooth connection and send it to the cloud component; data will be sent at intervals of 30 seconds as an average of the measurements at 10 seconds; if the data received from the smart module will be outside the normal limits, it will be sent asynchronously - at the time of the alarm/warning - to the cloud;
+e. read the data from the accelerometer, once per second, to correlate this information with that read from the smart sensor, in order to establish alarm conditions; the data is sent at 30 second intervals, in its entirety, in the form of bursts (longer messages, which contain all the values);
+f. allows entering a text associated with an alarm/warning, which will be sent asynchronously to the cloud, once the alarm is activated;
+
+In the physical implementation of the project I used a more user-friendly configuration that contains the Arduino module.
+The necessary components and technologies are the following:
+
+- 1 Arduino Uno v3 module
+- 1 Bluetooth Mate Silver connector for Arduino class 2
+- 1 pulse sensor module
+- 1 Cardiac Activity Monitor module
+- Cable and medical electrodes
+- 1 module Humidity and temperature sensors
+- Arduino IDE development environment.
+
+During the faculty I did exercises and projects in which I had to write code and I had to solve requirements such as: reading, displaying, sorting, deleting, etc.
