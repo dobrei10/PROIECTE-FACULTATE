@@ -88,4 +88,143 @@ The necessary components and technologies are the following:
 - 1 module Humidity and temperature sensors
 - Arduino IDE development environment.
 
+
+
 During the faculty I did exercises and projects in which I had to write code and I had to solve requirements such as: reading, displaying, sorting, deleting, etc.
+
+
+
+EDUCATIONAL PLATFORM CREATION:
+
+Within this project, we have developed a platform similar to a Virtual Campus where students from a university can access courses and find out their grades for the subjects they are enrolled in.
+
+An educational platform such as Virtual Campus usually contains the following elements and functionalities:
+
+Course management:
+
+Creating and organizing courses.
+Upload course materials (documents, presentations, videos).
+Configuring the course structure (modules, lessons, assignments).
+
+Assessment tools:
+
+Creating online tests and exams.
+Features for automatic assessment and instant feedback.
+Grading systems and student performance management.
+
+Communication and collaboration:
+
+Discussion forums for students and teachers.
+Internal messaging system.
+Group workspaces for collaborative projects.
+
+User management:
+
+Create and manage accounts for students, teachers and administrators.
+Managing user rights and roles.
+Monitoring user activity and generating reports.
+
+Educational Resources:
+
+Digital library with access to articles, books and other educational resources.
+Integration with other online resource platforms (eg university libraries, scientific databases).
+
+Online Learning Support:
+
+Video conferences and webinars.
+Tools for recording and sharing video lessons.
+Interactive activities and simulations.
+
+Customization and flexibility:
+
+Customizing the user interface and graphic themes.
+Tailoring the content and learning experience to each user's needs.
+
+Integration with other systems:
+
+Connecting with learning management systems (LMS) such as Moodle or Blackboard.
+Integration with student data management systems (SIS).
+Synchronization with external calendars and programs.
+
+Support and security:
+
+Technical assistance and user support.
+Data backup and restore functionality.
+Security measures to protect user data.
+
+Analytics and reports:
+
+Detailed analyzes of student progress and performance.
+Custom reports for teachers and administrators.
+Interactive dashboards for real-time monitoring of activities on the platform.
+These components are part of the infrastructure of a comprehensive educational platform, designed to facilitate the teaching and learning process in the online environment.
+
+
+
+PROJECT DEVELOPMENT USING VARIOUS TECHNOLOGICAL ENVIRONMENTS:
+- Butterworth filter
+- Level adaptation
+- Electronic filter
+- Interpolation
+
+
+
+THE EVOLUTION OF THE FOOTBALL TEAM F.C. BARCELONA USING MATLAB'S PREDICT FUNCTION FOR A SET OF DATA USING CURVE FITTING:
+
+INTRODUCTION:
+
+The project topic addressed in the discipline of Systems Identification is the study of the evolution of a football team in the Spanish championship La Liga Santander with the help of a prediction function in MATLAB for a given set of data.
+With the help of this prediction we can predict the outcome of a model in the future using past measurements.
+
+THEORETICAL AND PRACTICAL DEVELOPMENT:
+
+Thus, we know the number of stages played by the team is 32 and we know how many points the team had after each stage.
+We are going to specify how many points the team will have at the end of the football season, i.e. after 6 more stages, based only on the data set we had.
+To begin with, we will create two matrices that will contain the number of stages played in the Spanish championship and the number of points accumulated at each stage:
+
+etape=[1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31;32];
+puncte=[3;6;9;10;13;13;14;14;14;14;17;20;20;23;26;29;30;30;33;36;39;42;45;45;48;48;51;54;57;57;58;61];
+
+The variable curvefit is declared as the polynomial curve of the 3rd degree with the arguments stages and points and the graph is displayed which has on the right x the number of stages played so far, and on y the number of points summed up after the result of each stage: [function. fit]
+curvefit=fit(etape,puncte,'poly3','normalize','on')
+plot(curvefit,etape,puncte);
+
+The graph in Matlab: evidence of stages/points
+
+In the following, the graph will be displayed to which the prediction limits are added using the following command in Matlab: plot(curvefit,stages,points,'predfunc');
+
+Chart in Matlab: prediction bounds
+
+We want to find out how many points the F.C. team will have. Barcelona at the end of the football season, i.e. after the completion of the 38 stages.
+We will need to display the graph with the prediction of the next 6 legs that have not been played yet and also the prediction of the number of points:
+To solve this case we will have to use the following commands:
+plot(steps,points,'o')
+xlim([1,38])
+hold on plot(curvefit,'predobs')
+hold off
+
+Graph in Matlab: the number of possible points obtained after the 38 stages
+
+We will display a Fourier Series graph using the command in Matlab: curvefitfourier=fit(steps, points, 'fourier8','normalize','on'); plot(curvefitfourier,stages,points);
+
+We will display a Sum of Sines graph using the command in Matlab: curvefitsinus=fit(steps, points, 'sin8','normalize','on'); plot(fitsine curve, stages, points);
+
+We will graph the Polynomial Function of Degree 2 using the command in Matlab:
+curvefitpol2=fit(steps, points, 'poly2','normalize','on'); plot(curvefitpol2,steps,points);
+
+
+- With the help of Curve Fitting we were able to obtain a graph in which we observed on the two axes X and Y the exact values ​​that led to the subsequent anticipation of the results.
+- Using various functions in the Matlab application I was able to display the prediction limits and anticipate the possible number of points after the 6 stages, i.e. until the end of the season based only on the given set of values.
+- I also used other commands in Matlab to display graphs with Fourier Series, Sum of Sines and Polynomial of degree 2. I noticed how the fitted curve changes its shape.
+
+
+
+COMPLEX AUTOMATIONS:
+
+For the application part, I decided to simulate with the Matlab-Simulink application the scheme with number 1 from the first laboratory. The diagram shows "Starting a Synchronous Motor".
+
+With the help of the Matlab programming environment and the Simulink tool, I will study the effects that the synchronous motor can have when the operating parameters change and the evolution of the quantities of interest.
+
+- The oscilloscope's role is to help us observe the 6 signals that led our simulation to the desired final results.
+- The motor will need to be connected to a three-phase voltage source to observe changes in the rotor speed and the current passing through the rotor winding.
+- The supply voltage values ​​will change with the aim of observing in which starting stage the synchronous motor will be.
