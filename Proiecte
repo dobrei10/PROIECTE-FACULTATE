@@ -231,5 +231,177 @@ With the help of the Matlab programming environment and the Simulink tool, I wil
 
 
 
+ENDLESS RUN
+
+EndlessRun is an endless runner game in which the player is challenged to run continuously, avoiding obstacles along the way. 
+The main goal of the game is to get as high a score as possible by guiding the character through the wall corresponding to the color of the wall and enduring as long as possible. 
+The popularity of this genre of games has been significantly influenced by the success of the 'Temple Run' and 'Jetpack Joyride' titles, both of which have become representative of the endless runner category. 
+The game has two main scenes, available in a directory called "Scenes": the "Game" scene, which contains the main menu, and the "Shop" scene, which is the accessory shop.
+
+
+First scene: Main menu
+
+This scene displays the game menu, including: the start button, the game title, the balance of coins collected, the maximum score, the Shop button and the Exit button. 
+The menu is stylized with a background consisting of an image representative of the game, with buttons and text superimposed. 
+The game title, "EndlessRun", is placed at the top, centered, using a black robotic font. The coin bar, colored in blue, contains a suggestive image of a coin, and the high score is displayed in a dedicated bar, complemented by an image symbolizing first place.
+At the bottom are the start, store and exit buttons. The yellow start button includes the text "Play" and a script to start the game. 
+The Shop button and Exit button have similar functions, each with a specific script: "Shop()" for the Shop button and close application for the Exit button.
+When the "Start" button is pressed, the menu disappears and the character animation starts, representing the character running on a dynamically generated path. 
+The character automatically moves forward and the player can only control left-right movement to avoid obstacles. 
+Score is accumulated by avoiding obstacles and collecting coins, which can be used for purchases in the shop.
+
+Second scene: Accessories shop
+
+The Shop scene has a purple background and shows the main character without accessories. 
+To the side are the "Next" and "Previous" buttons, used for navigating through the list of accessories. 
+Selected accessories are displayed in the center, with "Select" and "Buy" buttons underneath, along with the price of each accessory. 
+If the accessory is purchased, the "Select" button equips the character with it and returns to the main scene. 
+In case of insufficient funds, the "Buy" button becomes unavailable and changes color. The game ends when the player fails to avoid obstacles or pass through the correct wall.
+
+We tested the app and found that the player's speed reaches too high a value shortly after starting the game, making the game impossible in bypassing obstacles .
+I redid the formula for player speed and changed the movement speed value to a lower value .
+
+The balance of coins is the sum of the number of gates (colored walls) reached. Passing through a gate is equivalent to 5 coins. 
+The score is the sum of coins collected and gates reached, so one coin collected is equivalent to 3 points and one gate is equivalent to 10 points.
+
+
+
+SCRIPT:
+
+TrackManager.cs
+
+This script tracks the progress of the game. We initialize the plane's movement speed ("track"), which can be configured from the interface; we set the "wallHolder" object to null and assign it the "WallHolder" object; we create a list of materials to represent the colors of the blocks in the "wallHolder"; initialize an object of type "ParticleSystem" to generate visual effects following the collision of the player with the gates; set and initialize to null an object of type "TrackManager"; create a list of type "MeshRender" to manage the colors of the walls that form the gate and initialize a variable that refers to the gate.
+The void type Start() function assigns each block in the "wallHolder" a color from the material list and checks if the player has passed through the gate in the active track. 
+If so, we call the ColorChanger() function, which will change the player's color.
+In the ColorChanger() function, we create a new material list, add the existing material colors to it, randomly set the order of the materials in the list, and remove the first material when it reaches position -1. 
+We set the "Gate" tag for the "gate" object and adjust the player color to match the gate color.
+The BurstGate() function takes two parameters: "pos" of type Vector3 and "mat" of type Material. 
+With this function, the position of the effects is set to match the player's position, the particle effects are activated, and the particle is assigned the color of the block passed through.
+
+
+
+
+GameUI.cs
+
+This script is responsible for managing the user interface and various functions within EndlessRun. 
+Using the script, UI elements such as score display, menu management and end-game interactions are coordinated. 
+In the following, we detail its components and functionalities.
+
+
+
+Implemented functionalities
+1. Awake() method
+- Role: Ensures existence of a single instance of the class (design pattern Singleton) and initializes previously saved values.
+- Details:
+o If an active instance of the class already exists, the current object is destroyed.
+o The values for points are retrieved using PlayerPrefs, and the text for coins (cashText) is updated.
+2. Start() method
+- Role: Initializes the main menu interface at the start of the game.
+- Details:
+o The text for the best score is updated using the value in PlayerPrefs.
+o Collected coins are displayed in the main menu.
+3. Update() method
+- Role: Dynamically updates the user interface throughout the game.
+- Details:
+o The scoreText is synchronized with the current score value.
+o The coin text is updated in real-time.
+4. StartBtn() method
+- Role: Starts the game when the player presses the start button.
+- Details:
+o Enables the gameplay interface (gamePlayUI) and disables the main menu (gameMainMenu).
+o Set the isGameStarted variable in CharacterController to true and starts the character's running animation.
+5. RetryBtn() method
+- Role: Enables resuming the game by reloading the current scene.
+- Details:
+o Uses the SceneManager to reload the active scene, resetting game progress.
+6. Exit() method
+- Role: Closes the application.
+- Details:
+o Calls the Application.Quit() function to close the game.
+7. GameOverUI() method
+- Role: Handles the end-game interface and updates score and coin values.
+- Details:
+o Disables the gameplay UI and enables the game over UI.
+o Saves the current score and checks for a new record, updating HighScore if necessary.
+o Displays motivational messages based on player performance:
+ If score is over 200: congratul congratulatory message for excellent dexterity.
+ If score is between 100 and 200: message of encouragement.
+ If the score is below 100: suggestion for medical advice.
+8. Shop() method
+- Role: Navigates to the "Shop" scene, where the player can purchase accessories.
+- Details:
+o Uses the SceneManager to load the "Shop" scene.
+Data Persistence: The script uses PlayerPrefs to save and retrieve score and coin values.
+- Manage game states: It clearly delineates the logic of each state, such as the main menu, gameplay, and end interface.
+- Personalized messages: Add a motivational and interactive element by displaying messages based on user performance.
+
+
+RandomTile.cs
+
+This script controls the random generation of tiles in an endless runner game. 
+Its functionality ensures that the game environment is dynamic, expands ahead of the player and removes unused tiles behind the player to optimize performance.
+
+Variables declared:
+1. public GameObject[] prefab:
+o Array containing the various prefabs for the path pieces.
+o Each piece represents a section of the path to be dynamically generated.
+2. public float zSpawn = 0f:
+o The z coordinate where the next piece will be placed.
+o Initially set to 0.
+3. public float tilelenght = 50f:
+o The length of each tile.
+o Each piece is placed following the other on the z-axis.
+4. public int numberOfTile = 4:
+o The number of simultaneously active tiles on the trail.
+5. public Transform playerTransform:
+o Player position reference used to decide when to generate new pieces.
+6. private List<GameObject> activeTiles:List that holds the currently active tiles on the path.
+
+
+
+
+Functionality of the main methods
+1. Start()
+- Role: Initializes the game path by generating a set of pieces at the start.
+- Implementation:
+o Generate the first 4 tiles (holding the numberOfTile value).
+o The first piece is always generated using index 0 (default template).
+o The rest of the pieces are randomly chosen from the prefab array.
+2. Update()
+- Role: Monitors the player's position and generates new pieces in front of the player as it advances.
+- Implementation:
+o If the player's position minus 50 exceeds the last zSpawn position minus the total length of active pieces, a new piece is generated.
+o An inactive tile is deleted from the list using the DeletTiles() method.
+3. SpawnManager(int tileIndex)
+- Role: Creates a new tile on the path.
+- Parameters:
+o tileIndex: The index of the tile in the prefab array to generate.
+- Implementation:
+o Instantiates a tile at the position defined by zSpawn.
+o The generated part is added to the list.
+o The zSpawn value is incremented by tilelenght to set the position of the next part.
+4. DeletTiles()
+- Role: Removes the first tile in the list (furthest from the player) to optimize resources.
+- Implementation:
+o Deletes the object in the first position of the activeTiles list.
+o The reference to this object is removed from the list using RemoveAt(0).
+
+
+
+
+1.	Optimization:
+o Removing inactive tiles via the DeleteTiles() method prevents unnecessary object accumulation and excessive memory consumption.
+
+2.	Flexibility:
+o The path is dynamic, and tile variety is provided by random selection from the prefab array.
+
+3.	Player-based control:
+o The player's position determines when new tiles are generated, which ensures game continuity and avoids unnecessary generation.
+
+
+
+
+
+
 
 
