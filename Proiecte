@@ -228,3 +228,8 @@ With the help of the Matlab programming environment and the Simulink tool, I wil
 - The oscilloscope's role is to help us observe the 6 signals that led our simulation to the desired final results.
 - The motor will need to be connected to a three-phase voltage source to observe changes in the rotor speed and the current passing through the rotor winding.
 - The supply voltage values ​​will change with the aim of observing in which starting stage the synchronous motor will be.
+
+
+
+
+
